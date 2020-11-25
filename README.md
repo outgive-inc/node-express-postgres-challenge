@@ -34,13 +34,13 @@ sudo docker-compose up
 The client application should now be running on:
 
 ```
-http://localhost:3000
+http://localhost:4001
 ```
 
 The server application should now be running on:
 
 ```
-http://localhost:3001
+http://localhost:5001
 ```
 
 When you make a change to the client and server source code, the respective Docker containers running will be udpated as well. In other words, hot-reloading is enabled.
