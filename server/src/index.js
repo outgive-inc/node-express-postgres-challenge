@@ -6,9 +6,11 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const uuid = require('uuid/v4');
-
 // Config
 const config = require('./config');
+
+// Extras
+const { validateParams, buildNewTaskQuery, buildUpdateTaskQuery, findPresentKeys } = require('./js/tasks');
 
 // Initialization
 const app = express();
@@ -67,18 +69,22 @@ app.get('/api/v1/tasks/:id', async (req, res) => {
 
 // Create a todo task
 app.post('/api/v1/tasks', async (req, res) => {
+  
+  let { errors, isValid } = validateParams(req.body);
+  if(!isValid) {
+    res.status(400).json(errors);
+    return;  
+  }
+  
+  let {isTitlePresent} = findPresentKeys(req.body);
+  if( !isTitlePresent ) {
+    errors.push("No title found in body parameters");
+    res.status(400).json(errors);
+    return;
+  }
+
   pgClient
-    .query(
-      `
-      INSERT INTO tasks (id, title, details, completed)
-      VALUES(
-        '${uuid()}'::uuid, 
-        '${req.body.title}',
-        '${req.body.details}', 
-        ${req.body.completed}
-      );
-      `
-    )
+    .query( buildNewTaskQuery(req.body) )
     .then((result) => {
       res.status(200).send("success fully created task");
     })
@@ -87,13 +93,15 @@ app.post('/api/v1/tasks', async (req, res) => {
 
 // Update a todo task
 app.put('/api/v1/tasks/:id', async (req, res) => {
+  
+  let { errors, isValid } = validateParams(req.body);
+  if(!isValid) {
+    res.status(400).json(errors);
+    return;  
+  }
+
   pgClient
-    .query(`
-      UPDATE tasks  
-      SET title  = '${req.body.title}',
-          details = '${req.body.details}',
-          completed = ${req.body.completed}
-      WHERE id='${req.params.id}'::uuid;`)
+    .query( buildUpdateTaskQuery(req.body, req.params.id) )
     .then((result) => {
       res.status(200).send("Updated task.");
     })
