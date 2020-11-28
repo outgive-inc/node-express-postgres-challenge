@@ -28,6 +28,8 @@ const pgClient = new Pool({
 });
 pgClient.on('error', () => console.log('Lost Postgres connection'));
 
+pgClient.connect();  // Need to connect first before I can query
+
 // TODO: Create initial DB table called task
 pgClient
   .query(
