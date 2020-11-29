@@ -7,8 +7,7 @@ axios.defaults.baseURL = 'http://localhost:5001';
 
 const blankTask = {
   title: '',
-  details: '',
-  completed: undefined
+  details: ''
 };
 
 
@@ -41,7 +40,8 @@ class TaskGrid extends Component {
   // creates a list of tasks in current state
   taskList() {
     return this.state.tasks.map( (currentTask, i) =>  {
-      return <Task task={currentTask} showTaskForm={this.showTaskForm} deleteTask={this.deleteTask} key={i} />;
+      return <Task task={currentTask} showTaskForm={this.showTaskForm} deleteTask={this.deleteTask} 
+                   updateTask={this.updateTask} key={i} />;
     })
   }
 

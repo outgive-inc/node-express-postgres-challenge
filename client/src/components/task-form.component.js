@@ -6,8 +6,7 @@ class TaskForm extends Component {
 
     this.state = {
       title: '',
-      details: '',
-      completed: undefined
+      details: ''
     }
   }
 
@@ -25,11 +24,6 @@ class TaskForm extends Component {
     });
   }
 
-  onChangeCompleted = (e) => {
-    this.setState({
-      completed: e.target.checked
-    })
-  }
 
 
   // submit form to the props sent my parent component
@@ -40,8 +34,7 @@ class TaskForm extends Component {
     const task = {
       id: this.props.task.id,
       title: this.state.title,
-      details: this.state.details,
-      completed: this.state.completed
+      details: this.state.details
     }
   
     this.props.onSubmit(task);
@@ -52,8 +45,7 @@ class TaskForm extends Component {
     // clear state on exit
     this.setState({
       title: '',
-      details: '',
-      completed: undefined
+      details: ''
     });
 
     this.props.exitTaskForm();
@@ -76,8 +68,6 @@ class TaskForm extends Component {
               <form onSubmit={this.onSubmit}>
                 <input name="title" placeholder="Title" type="text" onChange={this.onChangeTitle} defaultValue={this.props.task.title} />
                 <input name="details" placeholder="Details" type="text" onChange={this.onChangeDetails} defaultValue={this.props.task.details}/>
-                <label> Completed? </label>
-                <input type="checkbox" onChange={this.onChangeCompleted} defaultChecked={this.props.task.completed}/>
                 <input type="submit" value="Submit Task" />
               </form>
             </div>

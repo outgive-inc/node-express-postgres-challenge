@@ -4,6 +4,10 @@ import React, { Component } from 'react';
 class Task extends Component{
   constructor(props) {
     super(props);
+
+    this.state = {
+      completed: this.props.task.completed
+    }
   }
   
   updateTask = (e) => {
@@ -14,12 +18,23 @@ class Task extends Component{
     this.props.deleteTask(this.props.task.id);
   }
 
+  toggleCompleted = (e) => {
+    const task = {
+      id: this.props.task.id,
+      completed: e.target.checked
+    }
+    this.setState({
+      completed: e.target.checked
+    })
+    this.props.updateTask(task);
+  }
+
   render() {
     return (
       <div className='card-wrapper'>
         <div className='card'>
           <div className='front'>
-            <h3 className={ this.props.task.completed ? 'completed-task' : ''}>
+            <h3 className={ this.state.completed ? 'completed-task' : ''}>
               {this.props.task.title}
             </h3>
           </div>
@@ -31,7 +46,7 @@ class Task extends Component{
               <i className="fa fa-trash" />
             </button>
             <div className='title-div'>
-              <h4 className={this.props.task.completed ? 'completed-task' : ''}>
+              <h4 className={this.state.completed ? 'completed-task' : ''}>
                 {this.props.task.title}
               </h4>
             </div>
@@ -40,6 +55,10 @@ class Task extends Component{
               <p>   
                 {this.props.task.details}
               </p>
+            </div>
+            <div className={'completed-div'}>
+              <label>Completed:</label>
+              <input type="checkbox" checked={this.state.completed} onChange={this.toggleCompleted} />
             </div>
           </div>
         </div>
