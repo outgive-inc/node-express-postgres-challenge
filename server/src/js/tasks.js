@@ -1,3 +1,4 @@
+const { text } = require('body-parser');
 const uuid = require('uuid/v4');
 
 const PERMITTED_KEYS = ['title', 'details', 'completed'];
@@ -18,6 +19,14 @@ const findPresentKeys = function (taskParams) {
   return { isTitlePresent, isDetailsPresent, isCompletedPresent }
 }
 
+const isUUIDv4 = function (text) {
+  let res = text.toLowerCase.match("^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$");
+  if(res === null) {
+    return false;
+  }
+  return true
+}
+
 // function that filters and validates the body parameters
 const validateParams = function (taskParams) {
   let errorMessages = [];
@@ -33,6 +42,11 @@ const validateParams = function (taskParams) {
 
   if( 'title' in taskParams && typeof taskParams.title != 'string') {
     errorMessages.push("Invalid title data type.");
+    isValid = false;
+  }
+
+  if('title' in taskParams && taskParams.title.length < 1) {
+    errorMessages.push("Title must be a non-empty string")
     isValid = false;
   }
 
@@ -88,4 +102,4 @@ const buildUpdateTaskQuery = function(taskParams, id) {
 }
 
 module.exports = { validateParams, buildNewTaskQuery,
-                  buildUpdateTaskQuery, findPresentKeys};
+                  buildUpdateTaskQuery, findPresentKeys, isUUIDv4};

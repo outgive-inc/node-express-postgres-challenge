@@ -31,7 +31,7 @@ class TaskGrid extends Component {
   updateTaskGrid = (e) => {
     axios.get('/api/v1/tasks/')
       .then(response => {
-        this.setState({ tasks: response.data });
+        this.setState({ tasks: response.data.tasks });
       })
       .catch( (error) => {
         console.log(error);
