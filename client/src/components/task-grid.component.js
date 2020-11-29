@@ -29,6 +29,7 @@ class TaskGrid extends Component {
   }
 
   updateTaskGrid = (e) => {
+    //very inefficient for now, improve this next time
     axios.get('/api/v1/tasks/')
       .then(response => {
         this.setState({ tasks: response.data.tasks });
@@ -36,14 +37,6 @@ class TaskGrid extends Component {
       .catch( (error) => {
         console.log(error);
       });
-  }
-  
-  // creates a list of tasks in current state
-  taskList() {
-    return this.state.tasks.map( (currentTask, i) =>  {
-      return <Task task={currentTask} showTaskForm={this.showTaskForm} deleteTask={this.deleteTask} 
-                   updateTask={this.updateTask} key={i} />;
-    })
   }
 
   showTaskForm = (task, onSubmitTarget) => {
@@ -61,7 +54,7 @@ class TaskGrid extends Component {
   addTask = (newTask) => {
     axios.post('/api/v1/tasks/', newTask)
       .then( res => {
-        this.updateTaskGrid();
+        if( res.data.result === 'success') this.updateTaskGrid();
       })
       .catch( e => alert(e));
   }
@@ -82,6 +75,14 @@ class TaskGrid extends Component {
       .catch( e => alert(e));
   }
 
+  // creates a list of tasks in current state
+  taskList() {
+    return this.state.tasks.map( (currentTask, i) =>  {
+      return <Task task={currentTask} showTaskForm={this.showTaskForm} deleteTask={this.deleteTask} 
+                   updateTask={this.updateTask} key={i} />;
+    })
+  }
+  
   render() {
     return (
       <div>

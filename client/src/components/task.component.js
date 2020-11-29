@@ -35,7 +35,7 @@ class Task extends Component{
 
   render() {
     return (
-      <div className='card-wrapper'>
+      <div className='card-wrapper task-card'>
         <div className='card'>
           <div className='front'>
             <h3 className={ this.state.completed ? 'completed-task' : ''}>

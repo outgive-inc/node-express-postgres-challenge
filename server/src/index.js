@@ -78,7 +78,7 @@ app.get('/api/v1/tasks/:id', async (req, res) => {
     .query(`SELECT * FROM tasks WHERE id='${req.params.id}'::uuid;`)
     .then((result) => {
       let responseResult = result.rows.length === 0 ? "failed" : "success"
-      res.status(200).json({
+      res.json({
         result: responseResult,
         task: result.rows[0]
       });
@@ -153,7 +153,7 @@ app.delete('/api/v1/tasks/:id', async (req, res) => {
     });
     return;
   }
-  
+
   pgClient
     .query(`DELETE FROM tasks WHERE id='${req.params.id}'::uuid;`)
     .then((result) => {

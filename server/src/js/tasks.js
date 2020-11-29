@@ -1,4 +1,3 @@
-const { text } = require('body-parser');
 const uuid = require('uuid/v4');
 
 const PERMITTED_KEYS = ['title', 'details', 'completed'];
@@ -20,11 +19,11 @@ const findPresentKeys = function (taskParams) {
 }
 
 const isUUIDv4 = function (text) {
-  let res = text.toLowerCase.match("^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$");
+  let res = text.toLowerCase().match("^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$");
   if(res === null) {
     return false;
   }
-  return true
+  return true;
 }
 
 // function that filters and validates the body parameters
