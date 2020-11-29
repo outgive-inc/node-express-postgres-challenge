@@ -10,6 +10,10 @@ class Task extends Component{
     }
   }
   
+  static getDerivedStateFromProps(nextProps, prevState) {  
+    return {completed: nextProps.task.completed};
+  }
+
   updateTask = (e) => {
     this.props.showTaskForm(this.props.task, 'update');
   }

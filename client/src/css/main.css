@@ -1,13 +1,24 @@
-@media(hover: hover) and (pointer: fine) {}
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+html{
+  margin: 0;
+  min-height: 100%;
+}
+
 
 body{
-  height: 100vh;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   font-family: 'Source Sans Pro', sans-serif;
-  background: -moz-linear-gradient(315deg,  #ffe0e3 32%, #a7e0e5 68%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(315deg,  #ffe0e3 32%,#a7e0e5 68%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(315deg,  #ffe0e3 32%,#a7e0e5 68%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  height: 100%;
+  background: -moz-linear-gradient(315deg,  #ffe0e3 32%, #a7e0e5 68%) fixed; /* FF3.6-15 */
+  background: -webkit-linear-gradient(315deg,  #ffe0e3 32%,#a7e0e5 68%) fixed; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(315deg,  #ffe0e3 32%,#a7e0e5 68%) fixed; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background-repeat: no-repeat;
+  overflow: auto;
+
 }
 
 .card-wrapper, .add-task-card-wrapper {
@@ -161,11 +172,12 @@ i.fa {
 
 #add-task-front {
   background-color: rgba(255, 255, 255, 0.4);
+  cursor: default;
 }
 
 #add-task-front button {
   border: none;
-  background: none;
+  background: rgb(0,0,0,0);
 }
 
 button {
@@ -173,6 +185,7 @@ button {
   padding: 0;
   border-radius: 5px;
   border-style: solid;
+  background: none;
 }
 
 .title-div {
@@ -209,6 +222,7 @@ button {
   position: absolute;
   bottom: 10px;
   height: 25px;
+  background: none;
 }
 
 .update-button{
@@ -235,8 +249,58 @@ button {
   text-decoration: line-through;
 }
 
+input[type=submit]:disabled,
+input[type=submit]:disabled:hover {
+  background: #dddddd;
+  box-shadow: none;
+  color: black;
+  cursor: not-allowed;
+}
+
 .completed-div {
   position: absolute;
   bottom: 10px;
   left: 5px;
 }
+
+.title-bar-wrapper {
+  margin-top: 25px;
+  overflow: hidden;
+}
+.title-bar {
+  margin-left: 5%;
+  font-family: 'Bebas Neue';
+  font-size: 4em;
+  background-image: linear-gradient(to right, rgb(244, 244, 97, 0.8), rgb(244, 244, 97, 0.8) );
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  transition: background .5s;
+  max-width: 50%;
+  overflow: hidden;
+
+}
+.title-bar img {
+  padding-left: 1em;
+  width: 75px;
+  -moz-transition: all .6s;
+  -webkit-transition: all .6s;
+  transition: all .6s;
+  position: absolute;
+  top: -100px;
+  
+}
+
+.title-bar:hover {
+    background-size: 100% 100%;
+}
+
+.title-bar:hover>img {
+  transform: translate3d(-15px, 130px, 0px);
+
+}
+
+#title-not-valid {
+  color: red;
+}
+
+

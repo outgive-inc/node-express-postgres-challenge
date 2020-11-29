@@ -15,6 +15,7 @@ class TaskGrid extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       tasks: [],
       isTaskFormVisible: false,
@@ -97,8 +98,9 @@ class TaskGrid extends Component {
           </div>
         </div>
         
-        <TaskForm isVisible={this.state.isTaskFormVisible} exitTaskForm={this.hideTaskForm} 
-                  onSubmit={this.state.submitTarget==='add' ? this.addTask : this.updateTask} task={this.state.targetTask} /> 
+        <TaskForm isVisible={this.state.isTaskFormVisible}  exitTaskForm={this.hideTaskForm} 
+                  onSubmit={this.state.submitTarget==='add' ? this.addTask : this.updateTask} 
+                  task={this.state.targetTask} /> 
       </div>
     )
   }

@@ -6,13 +6,43 @@ class TaskForm extends Component {
 
     this.state = {
       title: '',
-      details: ''
+      details: '',
+      isValidTask: false,
+      currTaskProp: {
+        title: this.props.task.title,
+        details: this.props.task.details
+      }
     }
+    
+    this.baseState = this.state;
   }
+  
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let newState = {}
 
+    if(nextProps.task.title !== prevState.currTaskProp.title){
+      newState.title = nextProps.task.title;
+      if(nextProps.task.title.length > 0) newState.isValidTask = true;
+    } 
+    if(nextProps.task.details !== prevState.currTaskProp.details) newState.details = nextProps.task.details;
+
+    newState.currTaskProp = {
+      title: nextProps.task.title,
+      details: nextProps.task.details
+    }
+    
+    return newState;
+  }
   // update state handlers
 
   onChangeTitle = (e) => {
+    if(e.target.value.length < 1){
+      console.log("it's less than 1!!")
+      this.setState({isValidTask: false})
+    }
+    else{
+      this.setState({isValidTask: true})
+    }
     this.setState({
       title: e.target.value
     });
@@ -42,11 +72,10 @@ class TaskForm extends Component {
   }
 
   onExit = () => {
-    // clear state on exit
     this.setState({
       title: '',
       details: ''
-    });
+    })
 
     this.props.exitTaskForm();
   }
@@ -65,10 +94,11 @@ class TaskForm extends Component {
                   <i className="fa fa-times fa-2x" />
                 </button>
               </div>
-              <form onSubmit={this.onSubmit}>
-                <input name="title" placeholder="Title" type="text" onChange={this.onChangeTitle} defaultValue={this.props.task.title} />
-                <input name="details" placeholder="Details" type="text" onChange={this.onChangeDetails} defaultValue={this.props.task.details}/>
-                <input type="submit" value="Submit Task" />
+              <form name="task-form" onSubmit={this.onSubmit}>
+                <span style={{display: this.state.isValidTask ? "none" : "block"}} id="title-not-valid">* a title is required!</span>
+                <input name="title" required placeholder="Title" type="text" onChange={this.onChangeTitle} defaultValue={this.props.task.title} />
+                <input name="details" placeholder="Details" type="text" onChange={this.onChangeDetails} defaultValue={this.props.task.details} />
+                <input disabled={!this.state.isValidTask} type="submit" htmlFor="task-form" value="Submit Task" />
               </form>
             </div>
           </div>
