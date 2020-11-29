@@ -19,19 +19,21 @@ class Task extends Component{
       <div className='card-wrapper'>
         <div className='card'>
           <div className='front'>
-            {this.props.task.title}
+            <h3 className={ this.props.task.completed ? 'completed-task' : ''}>
+              {this.props.task.title}
+            </h3>
           </div>
           <div className='back'>
+            <button className="update-button" onClick={this.updateTask}>
+              <i className="fa fa-pencil-square-o" />
+            </button>
+            <button className="delete-button" onClick={this.deleteTask}>
+              <i className="fa fa-trash" />
+            </button>
             <div className='title-div'>
-              <h2>
+              <h4 className={this.props.task.completed ? 'completed-task' : ''}>
                 {this.props.task.title}
-              </h2>
-              <button onClick={this.updateTask}>
-                <i className="fa fa-pencil-square-o" />
-              </button>
-              <button onClick={this.deleteTask}>
-                <i className="fa fa-trash" />
-              </button>
+              </h4>
             </div>
             <br />
             <div className='details-div'>

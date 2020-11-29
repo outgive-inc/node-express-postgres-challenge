@@ -70,7 +70,7 @@ class TaskForm extends Component {
             <div className="form-card">
               <div className="close"> 
                 <button onClick={this.onExit} >
-                  <i className="fa fa-times fa-3x" />
+                  <i className="fa fa-times fa-2x" />
                 </button>
               </div>
               <form onSubmit={this.onSubmit}>
@@ -78,7 +78,7 @@ class TaskForm extends Component {
                 <input name="details" placeholder="Details" type="text" onChange={this.onChangeDetails} defaultValue={this.props.task.details}/>
                 <label> Completed? </label>
                 <input type="checkbox" onChange={this.onChangeCompleted} defaultChecked={this.props.task.completed}/>
-                <input type="submit" value="Create Task" />
+                <input type="submit" value="Submit Task" />
               </form>
             </div>
           </div>

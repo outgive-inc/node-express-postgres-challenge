@@ -98,8 +98,7 @@ class TaskGrid extends Component {
         </div>
         
         <TaskForm isVisible={this.state.isTaskFormVisible} exitTaskForm={this.hideTaskForm} 
-                  onSubmit={this.state.submitTarget==='add' ? this.addTask : this.updateTask} task={this.state.targetTask} />         
-         
+                  onSubmit={this.state.submitTarget==='add' ? this.addTask : this.updateTask} task={this.state.targetTask} /> 
       </div>
     )
   }
