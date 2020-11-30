@@ -1,5 +1,6 @@
 import TaskGrid from './components/task-grid.component';
 import dancing from './images/dance.gif'
+
 function App() {
   return(
     <div className="App">

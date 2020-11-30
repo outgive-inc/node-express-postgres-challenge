@@ -3,6 +3,7 @@ import axios from 'axios';
 import TaskForm from './task-form.component';
 import Task from './task.component';
 
+// set defaults
 axios.defaults.baseURL = 'http://localhost:5001';
 
 const blankTask = {
@@ -76,13 +77,13 @@ class TaskGrid extends Component {
   }
 
   // creates a list of tasks in current state
-  taskList() {
+  taskList = () => {
     return this.state.tasks.map( (currentTask, i) =>  {
       return <Task task={currentTask} showTaskForm={this.showTaskForm} deleteTask={this.deleteTask} 
                    updateTask={this.updateTask} key={i} />;
     })
   }
-  
+
   render() {
     return (
       <div>

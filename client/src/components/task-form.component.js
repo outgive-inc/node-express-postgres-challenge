@@ -17,6 +17,7 @@ class TaskForm extends Component {
     this.baseState = this.state;
   }
   
+  // update state based on prop changes
   static getDerivedStateFromProps(nextProps, prevState) {
     let newState = {}
 
@@ -56,7 +57,7 @@ class TaskForm extends Component {
 
 
 
-  // submit form to the props sent my parent component
+  // submit form to the props sent by parent component
   onSubmit = (e) => {
     e.preventDefault();
     //  create object that will be used to create/update a task

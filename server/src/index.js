@@ -69,7 +69,7 @@ app.get('/api/v1/tasks/:id', async (req, res) => {
   if( !isUUIDv4(req.params.id) ){
     res.status(400).json({
       result: 'failed',
-      error: "Not a valid uuid"
+      error: "Not a valid v4 uuid"
     });
     return;
   }
@@ -120,7 +120,7 @@ app.put('/api/v1/tasks/:id', async (req, res) => {
   if( !isUUIDv4(req.params.id) ){
     res.status(400).json({
       result: 'failed',
-      error: "Not a valid uuid"
+      error: "Not a valid v4 uuid"
     });
     return;
   }
@@ -149,7 +149,7 @@ app.delete('/api/v1/tasks/:id', async (req, res) => {
   if( !isUUIDv4(req.params.id) ){
     res.status(400).json({
       result: 'failed',
-      error: "Not a valid uuid"
+      error: "Not a valid v4 uuid"
     });
     return;
   }
