@@ -1,10 +1,18 @@
+import TaskGrid from './components/task-grid.component';
+import dancing from './images/dance.gif'
+
 function App() {
-  return (
+  return(
     <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
-    </div>
+      <div className="title-bar-wrapper">
+        <div className="title-bar">
+          <span> Let's do some tasks</span>
+          <img src={dancing} />
+        </div>
+      </div>
+      <TaskGrid />
+    </div>    
   );
-}
+};
 
 export default App;
