@@ -29,8 +29,6 @@ const pgClient = new Pool({
 });
 pgClient.on('error', () => console.log('Lost Postgres connection'));
 
-pgClient.connect();  // Need to connect first before I can query
-
 // TODO: Create initial DB table called task
 pgClient
   .query(
@@ -89,7 +87,6 @@ app.get('/api/v1/tasks/:id', async (req, res) => {
 
 // Create a todo task
 app.post('/api/v1/tasks', async (req, res) => {
-  
   let { errors, isValid } = validateParams(req.body);
   if(!isValid) {
     res.status(400).json({errors: errors});

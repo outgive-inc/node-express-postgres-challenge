@@ -38,7 +38,6 @@ class TaskForm extends Component {
 
   onChangeTitle = (e) => {
     if(e.target.value.length < 1){
-      console.log("it's less than 1!!")
       this.setState({isValidTask: false})
     }
     else{
