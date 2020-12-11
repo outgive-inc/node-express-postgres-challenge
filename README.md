@@ -112,7 +112,7 @@ cd server/
 npm i
 node index
 ```
-To run the server side 
+To run the client side 
 ```
 cd client/
 npm i
