@@ -103,3 +103,18 @@ cd client/
 ## Submission
 
 Create a merge/pull request on Gitlab. Name the branch as {firstname}-{lastname}-submission.
+
+## Submited Branch
+
+To run the server side 
+```
+cd server/
+npm i
+node index
+```
+To run the client side 
+```
+cd client/
+npm i
+npm start
+```
