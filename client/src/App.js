@@ -1,9 +1,14 @@
+import React from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import List from './screens/list';
+
 function App() {
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={List} />
+      </Switch>
+   </BrowserRouter>
   );
 }
 
