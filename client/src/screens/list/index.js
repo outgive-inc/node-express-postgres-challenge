@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { 
   Row, 
   ListGroup, 
@@ -16,9 +17,7 @@ import {
 } from 'react-bootstrap';
 
 import { TaskItem } from '../../components/molecules';
-import { getTaskList, addTask, deleteTask, updateTask } from '../../redux/actions/task';
-
-import './index.css';
+import { getTaskList, addTask } from '../../redux/actions/task';
 
 const StyledButton = styled(Button)`
   margin-bottom: 10;
@@ -39,8 +38,6 @@ export default function List() {
   }, []);
 
   
-
-
   const handleTitleChange = (event) => {
     let fleldVal = event.target.value;
     setTitle(fleldVal);
@@ -89,15 +86,7 @@ export default function List() {
     return (<Pagination>{items}</Pagination>);
   }
 
-  const deleteItem = (item) => {
-    console.log('deleteItem');
-    dispatch(deleteTask(item.id));
-  }
 
-  const updateItem = (id, title, details, completed) => {
-    console.log('updateItem');
-    dispatch(updateTask(id,title,details,completed));
-  }
 
   return (
       <>
@@ -118,7 +107,12 @@ export default function List() {
                   store.taskReducer.data.map(function(object, i){
                     return ( 
                       <ListGroup.Item> 
-                        <TaskItem item={object} updateItem={updateItem.bind(this)} deleteItem={deleteItem.bind(this)}/>
+                        <Link to={{
+                          pathname: '/detail',
+                          state: { object }
+                        }}>
+                          <TaskItem item={object}/>
+                        </Link>
                       </ListGroup.Item>
                     );
                   })
