@@ -1,9 +1,13 @@
 version: '3'
 services:
+
   postgres:
     image: postgres:latest
     environment:
       - POSTGRES_PASSWORD=postgres_password
+    ports:
+        - "5432:5432"
+    
   web-app:
     build:
       context: ./client
@@ -14,6 +18,7 @@ services:
     ports:
       - '4001:3000'
     restart: on-failure
+
   to-do-api:
     build:
       context: ./server
