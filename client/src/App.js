@@ -1,21 +1,31 @@
 import React, {useState} from "react"
-
 import Grid from '@material-ui/core/Grid';
-import TodoFormDelo from './components/TodoFormDelo'
-import TodoDelo from './components/TodoDelo'
+import TodoForm from './components/TodoForm'
+import TodoList from './components/TodoList'
+import TodoFooter from './components/TodoFooter'
+
+import { Button } from "@material-ui/core";
+
 function App() {
   const [todos, setTodos] = useState([])
   function addTodo(todo) {
     setTodos([todo, ...todos])
-    console.log(todo)
+  }
+  function seeTodos(){
+    console.log(todos)
   }
   return(
-    <Grid container justify = "center">
+    <Grid container justify="center" spacing={3}>
+      <Grid item xs={8}>
+        <TodoForm addTodo={addTodo} />
+        <TodoList todos={todos} />
+        <TodoFooter></TodoFooter>
+      </Grid>
+  
+      <Grid item xs={8}>
+        <Button onClick={seeTodos}>console todos</Button>
+      </Grid>
       
-      <TodoFormDelo addTodo={addTodo}/>
-        {todos.map((todo, i) => {
-          return <TodoDelo todo={todo} key={i}/>
-        })}
     </Grid>
   )
 }

@@ -6,6 +6,9 @@ services:
       - POSTGRES_PASSWORD=postgres_password
   web-app:
     build:
+      args: 
+        HTTP_PROXY: http://hrdproxy.hrd-s.com:81
+        HTTPS_PROXY: http://hrdproxy.hrd-s.com:81
       context: ./client
       dockerfile: Dockerfile.dev
     volumes:
@@ -16,6 +19,9 @@ services:
     restart: on-failure
   to-do-api:
     build:
+      args: 
+          HTTP_PROXY: http://hrdproxy.hrd-s.com:81
+          HTTPS_PROXY: http://hrdproxy.hrd-s.com:81
       context: ./server
       dockerfile: Dockerfile.dev
     ports:
