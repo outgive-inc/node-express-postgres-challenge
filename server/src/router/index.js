@@ -3,50 +3,10 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const uuid = require('uuid/v4');
+const { body, validationResult } = require('express-validator');
 
 router.use(cors());
 router.use(bodyParser.json());
-
-
-// ****************Previous code 
-// Postgres client
-// const { pgClient } = require('pg');
-// const pgClient = new pgClient({
-//   user: config.pgUser,
-//   host: config.pgHost,
-//   database: config.pgDatabase,
-//   password: config.pgPassword,
-//   port: config.pgPort,
-// });
-// pgClient.on('error', () => console.log('Lost Postgres connection'));
-
-// TODO: Create initial DB table called task
-// pgClient
-//   .query(
-//     `
-//      // TODO: Inser create table SQL query here
-//     `
-//   )
-//   .catch((err) => console.log(err));
-
-// ****************Test to connect 
-// const {Client} = require('pg')
-// const client = new Client({
-//     user: 'postgres',
-//     host: 'localhost',
-//     database: 'postgres',
-//     password: 'postgress_password',
-//     port: 5432
-// })
-
-// client.connect()
-// .then(() => console.log('ok na'))
-// .catch((e) => console.log(e))
-// .finally(() => {
-//     console.log('finally')
-//     client.end
-// })
-
 
 // Config
 
@@ -106,34 +66,46 @@ router.get('/v1/task', async (req, res) => {
     res.send(item.rows[0])
   })
   .catch(err => {
-    console.log(err)
-    res.send(err)
+    res.status(400).json(err)
   })
-  // res.send(item)
 });
 
-// *********************MYTODO => ADD res.status to all, improve messages, improve validations
 // Create a todo task
-router.post('/v1/task', async (req, res) => {
-  // TODO: Insert your route logic here
-  // MYTODO: remove other field other than (title, details)
-  // MYTODO: validate if with title field (required)
+router.post('/v1/task', 
+  body('title').isLength({min: 2}), //validate
+  body('completed').isBoolean(),  //validate
+  async (req, res) => {
+  
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const id = uuid()
   const text = `INSERT INTO tasks (id, title, details, completed) VALUES ($1, $2, $3, $4)`
-  const values = [id, req.body.title, req.body.details, false]
+  const values = [id, req.body.title, req.body.details, req.body.completed]
   await pgClient.query(text, values)
   .then(() => {
-    res.send(`Created task id: ${id}`)
+    res.send({
+      id: id,
+      msg: `Created task id: ${id}`
+    })
   })
   .catch(err => {
-    console.log(err)
-    res.send('The request failed in adding a record due to an internal error.')
+    res.status(400).json(err)
   })
 });
 
 // Update a todo task
-router.put('/v1/task/:id', async (req, res) => {
+router.put('/v1/task/:id', 
+  body('title').isLength({min: 2}), //validate
+  body('completed').isBoolean(),  //validate
+  async (req, res) => {
+
   // TODO: Insert your route logic here
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const id = req.params.id
   const { title, details, completed} = req.body
   const text = `UPDATE tasks SET title = $1, details = $2, completed = $3 WHERE id = $4`
@@ -143,8 +115,7 @@ router.put('/v1/task/:id', async (req, res) => {
       res.send(`Updated task id: ${id}`)
   })
   .catch(err => {
-      console.log(err)
-      res.send('The request failed in updating a record due to an internal error.')
+      res.status(400).json(err)
   })
 });
 
@@ -159,8 +130,7 @@ router.delete('/v1/task/:id', async (req, res) => {
       res.send(`Deleted task id: ${id}`)
   })
   .catch(err => {
-      console.log(err)
-      res.send('The request failed in deleting a record due to an internal error.')
+      res.status(400).json(err)
   })
 });
 

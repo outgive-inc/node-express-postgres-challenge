@@ -1,17 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import NotesIcon from '@material-ui/icons/Notes';
+import AssignmentReturnedOutlinedIcon from '@material-ui/icons/AssignmentReturnedOutlined';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-// MYTODO: VALIDATION
-// MYTODO: SMALLER SIZE
-// MYTODO: USED AXIOS => POST (ADD)
-function TodoForm({ addTodo }) {
+function TodoForm({ addTodo, defaultTodo }) {
     const useStyles = makeStyles((theme) => ({
         root: {
             margin: theme.spacing(0)
@@ -29,47 +25,51 @@ function TodoForm({ addTodo }) {
         details: "",
         completed: false
     })
-    function onAddTodo() {
-        if (todo.title) {
+    useEffect(() => {
+        setTodo(defaultTodo)
+        document.getElementById("title").focus()
+    }, [defaultTodo])
+    const onAddTodo = () =>{
+        if (todo.title.trim() && todo.title.length > 1) {
             addTodo(todo)
-            // axios here
             setTodo({ ...todo, title: "", details: "" })
-
         }
         else {
-            alert('empty!')
+            alert('Provide valid title of task!')
         }
     }
-    function onEditTitle(e) {
+    const onEditTitle = (e) => {
         setTodo({ ...todo, title: e.target.value })
     }
-    function onEditDetails(e) {
+    const onEditDetails = (e) => {
         setTodo({ ...todo, details: e.target.value })
+        
     }
-    function handleKeyUp(e) {
+    const handleKeyUp = (e) => {
         if (e.key === 'Enter') {
             onAddTodo()
+            document.getElementById("title").focus()
         }
     }
     return (
         <div className={classes.root}>
             <Paper component="form" className={classes.paper} variant="outlined">
-                <Grid container justify="center" spacing={0}>
+                <Grid container justify="center" spacing={1}>
                     <Grid item xs={8}>
-                        <Typography align="center" variant="h5"> Task ToDo</Typography>
-
+                        <Typography align="center" variant="h5"> Outgive ToDo</Typography>
                     </Grid>
                     <Grid item xs={10}>
                         <TextField
+                            autoFocus
                             fullWidth
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <NotesIcon />
+                                        <AssignmentReturnedOutlinedIcon color="action"/>
                                     </InputAdornment>
                                 ),
                             }}
-                            fullWidth
+                            id="title"
                             onChange={onEditTitle}
                             onKeyUp={handleKeyUp}
                             value={todo.title}
