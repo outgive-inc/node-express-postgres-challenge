@@ -221,7 +221,6 @@ export default class List extends Component{
         return(
  
             <div className = "container" style={custom}>
-                
                 <Card style={{height:"599px"}}>
                     <Card.Header as="h5">To do App, you have {this.state.data.length} List/s</Card.Header>
                         <Card.Body>
