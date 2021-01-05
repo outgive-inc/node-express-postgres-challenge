@@ -1,0 +1,50 @@
+Arguments: 
+  /home/flashery/.nvm/versions/node/v12.18.1/bin/node /usr/share/yarn/bin/yarn.js
+
+PATH: 
+  /home/flashery/.nvm/versions/node/v12.18.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  12.18.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, mkdir '/var/www/node-express-postgres-challenge/server/node_modules/abbrev'
+
+npm manifest: 
+  {
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "node src/index.js",
+      "dev": "nodemon src/index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Luke Mwila",
+    "license": "ISC",
+    "dependencies": {
+      "body-parser": "^1.19.0",
+      "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
+      "pg": "^8.0.3",
+      "uuid": "^3.3.3"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

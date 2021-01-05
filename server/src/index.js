@@ -1,66 +1,56 @@
-require('dotenv').config();
+require("dotenv").config();
 
 // Express App Setup
-const express = require('express');
-const http = require('http');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const uuid = require('uuid/v4');
-
-// Config
-const config = require('./config');
+const express = require("express");
+const http = require("http");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const DB = require("./db/DB");
+const TaskController = require("./controller/TasksController");
 
 // Initialization
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Postgres client
-const { Pool } = require('pg');
-const pgClient = new Pool({
-  user: config.pgUser,
-  host: config.pgHost,
-  database: config.pgDatabase,
-  password: config.pgPassword,
-  port: config.pgPort,
-});
-pgClient.on('error', () => console.log('Lost Postgres connection'));
-
-// TODO: Create initial DB table called task
-pgClient
-  .query(
-    `
-     // TODO: Inser create table SQL query here
-    `
-  )
-  .catch((err) => console.log(err));
+DB.createTable();
 
 // Express route handlers
 
 // Get all to do list tasks
-app.get('/api/v1/tasks', async (req, res) => {
-  // TODO: Insert your route logic here
+app.get("/api/v1/tasks", async (req, res) => {
+	// TODO: Insert your route logic here
+	const data = await TaskController.getTasks(req.query);
+	res.send(data);
 });
 
 // Get a single todo task
-app.get('/api/v1/tasks', async (req, res) => {
-  // TODO: Insert your route logic here
+app.get("/api/v1/task", async (req, res) => {
+	// TODO: Insert your route logic here
+	const data = await TaskController.getTask(req.query);
+	res.send(data);
 });
 
 // Create a todo task
-app.post('/api/v1/tasks', async (req, res) => {
-  // TODO: Insert your route logic here
+app.post("/api/v1/tasks", async (req, res) => {
+	// TODO: Insert your route logic here
+	const data = await TaskController.createTask(req.body);
+	res.send(data);
 });
 
 // Update a todo task
-app.put('/api/v1/tasks/:id', async (req, res) => {
-  // TODO: Insert your route logic here
+app.put("/api/v1/tasks/:id", async (req, res) => {
+	// TODO: Insert your route logic here
+	const data = await TaskController.updateTask(req.params.id, req.body);
+	res.send(data);
 });
 
 // Delete a todo task route
 
-app.delete('/api/v1/tasks/:id', async (req, res) => {
-  // TODO: Insert your route logic here
+app.delete("/api/v1/tasks/:id", async (req, res) => {
+	// TODO: Insert your route logic here
+	const data = await TaskController.deleteTask(req.params.id);
+	res.send(data);
 });
 
 // Server
