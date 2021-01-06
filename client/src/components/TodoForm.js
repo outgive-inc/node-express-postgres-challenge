@@ -32,7 +32,7 @@ function TodoForm({ addTodo, defaultTodo }) {
     const onAddTodo = () =>{
         if (todo.title.trim() && todo.title.length > 1) {
             addTodo(todo)
-            setTodo({ ...todo, title: "", details: "" })
+            setTodo({ ...todo, title: "", details: "", id: "" })
         }
         else {
             alert('Provide valid title of task!')
