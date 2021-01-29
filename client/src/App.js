@@ -1,9 +1,25 @@
+import React from "react";
+
+//Import Styles
+import "./App.css";
+
+//Import Components
+import TaskList from "./components/TaskList";
+import Nav from "./components/Nav";
+import TaskContextProvider from "./contexts/TaskContext";
+import TaskForm from "./components/TaskForm";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
-    </div>
+    <TaskContextProvider>
+      <div className="container">
+        <div className="app">
+          <Nav />
+          <TaskForm />
+          <TaskList />
+        </div>
+      </div>
+    </TaskContextProvider>
   );
 }
 
