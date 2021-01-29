@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   postgres:
     image: postgres:latest
@@ -12,14 +12,14 @@ services:
       - /app/node_modules
       - ./client:/app
     ports:
-      - '4001:3000'
+      - "4001:3000"
     restart: on-failure
   to-do-api:
     build:
       context: ./server
       dockerfile: Dockerfile.dev
     ports:
-      - '5001:3001'
+      - "5001:3001"
     restart: on-failure
     volumes:
       - /app/node_modules

@@ -1,0 +1,26 @@
+POST http://localhost:3001/api/v1/tasks
+Content-Type: application/json
+
+{
+    "title": "4th",
+    "details": "Drink Water"
+}
+
+###
+GET http://localhost:3001/api/v1/tasks
+
+###
+GET http://localhost:3001/api/v1/tasks/50a525e7-8686-4e57-9d20-d5eed15116cc
+
+###
+PUT http://localhost:3001/api/v1/tasks/7e38030e-97f1-4ea2-976a-b827731273fc
+Content-Type: application/json
+
+{
+    "title": "Learning Management System (Booking Tutor)",
+    "details": "haha details",
+    "completed":false
+}
+
+###
+DELETE http://localhost:3001/api/v1/tasks/5953fc90-993a-4ac4-aecb-a69f8907d364
