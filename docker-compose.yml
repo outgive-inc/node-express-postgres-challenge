@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_PASSWORD=postgres
   web-app:
     build:
       context: ./client
@@ -12,21 +12,24 @@ services:
       - /app/node_modules
       - ./client:/app
     ports:
-      - '4001:3000'
+      - '3000:3000'
     restart: on-failure
+    container_name: web-app
   to-do-api:
     build:
       context: ./server
       dockerfile: Dockerfile.dev
     ports:
-      - '5001:3001'
+      - '3001:3001'
     restart: on-failure
+    container_name: to-do-api
     volumes:
-      - /app/node_modules
-      - ./server:/app
+      - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
+      - ./server:/app # Look at the server directory and copy everything into the app folder in the container
     environment:
+      - CHOKIDAR_USEPOLLING=true
       - PGUSER=postgres
       - PGHOST=postgres
       - PGDATABASE=postgres
-      - PGPASSWORD=postgres_password
+      - PGPASSWORD=postgres
       - PGPORT=5432
