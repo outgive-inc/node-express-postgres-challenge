@@ -9,7 +9,7 @@ import Error from "./Error";
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const { request, error } = useHttp();
+  const { request, error, clearError } = useHttp();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +25,10 @@ const TodoList = () => {
 
     setTodos([data[0], ...todos]);
   };
+
+  if (error) {
+    clearError();
+  }
 
   return (
     <>

@@ -17,7 +17,7 @@ const Todo = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openFormModal, setOpenFormModal] = useState(false);
 
-  const { request, error } = useHttp();
+  const { request, error, clearError } = useHttp();
 
   useEffect(() => {
     const fetchTodo = async () => {
@@ -38,6 +38,10 @@ const Todo = () => {
 
     setTodo(updatedTodo);
   };
+
+  if (error) {
+    clearError();
+  }
 
   return (
     <>

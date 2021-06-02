@@ -27,8 +27,14 @@ export const useHttp = () => {
     []
   );
 
+  const clearError = useCallback(
+    () => setTimeout(() => setError(null), 3000),
+    []
+  );
+
   return {
     request,
     error,
+    clearError,
   };
 };
