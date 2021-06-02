@@ -1,8 +1,11 @@
+import TodoList from "./components/TodoList";
+import "./index.css";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
+    <div className="container mx-auto">
+      <h1 className="text-2xl text-center my-3">Todo App</h1>
+      <TodoList />
     </div>
   );
 }
