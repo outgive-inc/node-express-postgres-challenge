@@ -3,12 +3,13 @@ import TodoListItem from "./TodoListItem";
 import { useHttp } from "../hooks/useHTTP";
 
 import { PlusCircleIcon } from "@heroicons/react/solid";
-import Modal from "./Modal";
+import FormModal from "./formModal";
+import Error from "./Error";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const { request } = useHttp();
+  const { request, error } = useHttp();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +28,8 @@ const TodoList = () => {
 
   return (
     <>
-      <Modal
+      {error ? <Error /> : null}
+      <FormModal
         isOpen={openModal}
         setIsOpen={setOpenModal}
         actionTodo={createTodo}
@@ -39,6 +41,7 @@ const TodoList = () => {
           className="relative h-20 w-20 text-gray-600 hover:text-gray-900 cursor-pointer"
         />
       </div>
+      <div></div>
       {todos.map((todo) => {
         return <TodoListItem key={todo.id} todo={todo} />;
       })}
