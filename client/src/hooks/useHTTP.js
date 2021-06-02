@@ -1,13 +1,10 @@
 import { useCallback, useState } from "react";
 
 export const useHttp = () => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState("");
 
   const request = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {
-      setLoading(true);
       try {
         if (body) {
           body = JSON.stringify(body);
@@ -17,36 +14,21 @@ export const useHttp = () => {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.message || "Something went wrong");
+          // throw new Error(data.message || "Something went wrong");
+          setError(data.message || "Something went wrong");
         }
-
-        setLoading(false);
 
         return data;
       } catch (error) {
-        setLoading(false);
         setError(error.message);
         throw error;
       }
     },
     []
   );
-  const clearError = useCallback(
-    () => setTimeout(() => setError(null), 3000),
-    []
-  );
-  const clearMessage = useCallback(
-    () => setTimeout(() => setMessage(null), 3000),
-    []
-  );
 
   return {
     request,
-    loading,
     error,
-    message,
-    clearError,
-    clearMessage,
-    setMessage,
   };
 };
