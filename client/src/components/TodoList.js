@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import TodoListItem from "./TodoListItem";
+import useRequest from "../hooks/useRequest";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
+  const { doRequest, errors } = useRequest({
+    url: "/api/v1/tasks",
+    method: "get",
+    onSuccess: (data) => setTodos(data),
+  });
 
   useEffect(() => {
     const fetchTodos = async () => {
-      try {
-        const response = await fetch("/api/v1/tasks");
-        const data = await response.json();
-
-        setTodos(data);
-      } catch (e) {
-        console.error(e);
-      }
+      await doRequest();
     };
 
     fetchTodos();
@@ -21,6 +20,7 @@ const TodoList = () => {
 
   return (
     <>
+      {errors}
       {todos.map((todo) => (
         <TodoListItem key={todo.id} todo={todo} />
       ))}
