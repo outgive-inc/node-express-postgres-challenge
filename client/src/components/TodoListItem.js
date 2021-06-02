@@ -1,24 +1,25 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { LinkIcon, PencilIcon } from "@heroicons/react/solid";
+import { LinkIcon } from "@heroicons/react/solid";
 import { Switch } from "@headlessui/react";
-import useRequest from "../hooks/useRequest";
+import { useHttp } from "../hooks/useHTTP";
 
 const TodoListItem = ({ todo }) => {
   const [completed, setCompleted] = useState(todo.completed);
-  const { doRequest, errors } = useRequest({
-    url: `/api/v1/tasks/${todo.id}`,
-    method: "put",
-    body: {
+  const { request } = useHttp();
+
+  const completeTodo = async () => {
+    const data = await request(`/api/v1/tasks/${todo.id}`, "PUT", {
       title: todo.title,
       completed: !completed,
-    },
-    onSuccess: () => setCompleted(!completed),
-  });
+    });
+
+    setCompleted(data.completed);
+  };
 
   return (
     <>
-      {errors}
       <div className="lg:flex lg:items-center lg:justify-between border border-grey rounded p-3 mb-2">
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
@@ -44,7 +45,7 @@ const TodoListItem = ({ todo }) => {
                   </Switch.Label>
                   <Switch
                     checked={completed}
-                    onChange={doRequest}
+                    onChange={completeTodo}
                     className={`${
                       completed ? "bg-blue-600" : "bg-gray-200"
                     } relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
@@ -61,30 +62,19 @@ const TodoListItem = ({ todo }) => {
           </div>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
-          <span className="hidden sm:block">
-            <button
-              type="button"
-              className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <PencilIcon
-                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
-                aria-hidden="true"
-              />
-              Edit
-            </button>
-          </span>
-
           <span className="sm:ml-3">
-            <button
-              type="button"
-              className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <LinkIcon
-                className="-ml-1 mr-2 h-5 w-5 text-white"
-                aria-hidden="true"
-              />
-              View
-            </button>
+            <Link to={`/todos/${todo.id}`}>
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <LinkIcon
+                  className="-ml-1 mr-2 h-5 w-5 text-white"
+                  aria-hidden="true"
+                />
+                Details
+              </button>
+            </Link>
           </span>
         </div>
       </div>

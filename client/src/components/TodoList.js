@@ -1,29 +1,47 @@
 import React, { useEffect, useState } from "react";
 import TodoListItem from "./TodoListItem";
-import useRequest from "../hooks/useRequest";
+import { useHttp } from "../hooks/useHTTP";
+
+import { PlusCircleIcon } from "@heroicons/react/solid";
+import Modal from "./Modal";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
-  const { doRequest, errors } = useRequest({
-    url: "/api/v1/tasks",
-    method: "get",
-    onSuccess: (data) => setTodos(data),
-  });
+  const [openModal, setOpenModal] = useState(false);
+  const { request } = useHttp();
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      await doRequest();
+    const fetchData = async () => {
+      const data = await request("/api/v1/tasks");
+      data.sort((a, b) => b.id - a.id);
+      setTodos(data);
     };
-
-    fetchTodos();
+    fetchData();
   }, []);
+
+  const createTodo = async (todo) => {
+    const data = await request("/api/v1/tasks", "POST", todo);
+
+    setTodos([data[0], ...todos]);
+  };
 
   return (
     <>
-      {errors}
-      {todos.map((todo) => (
-        <TodoListItem key={todo.id} todo={todo} />
-      ))}
+      <Modal
+        isOpen={openModal}
+        setIsOpen={setOpenModal}
+        actionTodo={createTodo}
+      />
+      <div className="flex justify-center my-3">
+        <hr className="absolute top-20 w-7/12" />
+        <PlusCircleIcon
+          onClick={() => setOpenModal(!openModal)}
+          className="relative h-20 w-20 text-gray-600 hover:text-gray-900 cursor-pointer"
+        />
+      </div>
+      {todos.map((todo) => {
+        return <TodoListItem key={todo.id} todo={todo} />;
+      })}
     </>
   );
 };
