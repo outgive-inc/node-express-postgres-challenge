@@ -1,13 +1,18 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
-const initialState = {
-  title: "",
-  details: "",
-};
-
-const Modal = ({ isOpen, setIsOpen, actionTodo }) => {
+const FormModal = ({ isOpen, setIsOpen, actionTodo, todo }) => {
+  let initialState = {
+    title: "",
+    details: "",
+  };
   const [form, setForm] = useState(initialState);
+
+  useEffect(() => {
+    initialState = !!todo ? todo : initialState;
+
+    setForm(initialState);
+  }, [todo]);
 
   const handleChange = ({ target }) => {
     setForm({
@@ -21,9 +26,10 @@ const Modal = ({ isOpen, setIsOpen, actionTodo }) => {
 
     if (form.title) {
       actionTodo(form);
+
+      setIsOpen(!isOpen);
     }
   };
-
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -66,7 +72,7 @@ const Modal = ({ isOpen, setIsOpen, actionTodo }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Create TODO
+                  {todo ? "Update TODO" : "Create TODO"}
                 </Dialog.Title>
                 <div className="mt-2">
                   <form onSubmit={onSubmit}>
@@ -81,11 +87,13 @@ const Modal = ({ isOpen, setIsOpen, actionTodo }) => {
                               TODO
                             </label>
                             <input
+                              required
                               type="text"
                               name="title"
                               id="title"
+                              value={form.title}
                               onChange={handleChange}
-                              className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                              className="p-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                               placeholder="Todo..."
                             />
                           </div>
@@ -102,9 +110,10 @@ const Modal = ({ isOpen, setIsOpen, actionTodo }) => {
                             <textarea
                               id="details"
                               name="details"
+                              value={form.details}
                               onChange={handleChange}
                               rows={7}
-                              className="shadow-sm border-none resize-none focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                              className="shadow-sm border-none resize-none focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                               placeholder="Type TODO details here"
                             />
                           </div>
@@ -122,7 +131,6 @@ const Modal = ({ isOpen, setIsOpen, actionTodo }) => {
                         <button
                           type="submit"
                           className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                          onClick={() => setIsOpen(!isOpen)}
                         >
                           Save
                         </button>
@@ -139,4 +147,4 @@ const Modal = ({ isOpen, setIsOpen, actionTodo }) => {
   );
 };
 
-export default Modal;
+export default FormModal;
