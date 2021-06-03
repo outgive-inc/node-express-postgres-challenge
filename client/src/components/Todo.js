@@ -29,7 +29,7 @@ const Todo = () => {
   }, []);
 
   const deleteTodo = async () => {
-    const data = await request(`/api/v1/tasks/${id}`, "DELETE");
+    await request(`/api/v1/tasks/${id}`, "DELETE");
     history.goBack();
   };
 

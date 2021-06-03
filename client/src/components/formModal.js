@@ -2,16 +2,16 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 
 const FormModal = ({ isOpen, setIsOpen, actionTodo, todo }) => {
-  let initialState = {
+  const initialState = {
     title: "",
     details: "",
   };
   const [form, setForm] = useState(initialState);
 
   useEffect(() => {
-    initialState = !!todo ? todo : initialState;
-
-    setForm(initialState);
+    if (!!todo) {
+      setForm(todo);
+    }
   }, [todo]);
 
   const handleChange = ({ target }) => {
