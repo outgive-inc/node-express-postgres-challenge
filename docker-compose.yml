@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_PASSWORD=postgres
   web-app:
     build:
       context: ./client
@@ -12,14 +12,14 @@ services:
       - /app/node_modules
       - ./client:/app
     ports:
-      - '4001:3000'
+      - '3000:3000'
     restart: on-failure
   to-do-api:
     build:
       context: ./server
       dockerfile: Dockerfile.dev
     ports:
-      - '5001:3001'
+      - '3001:3001'
     restart: on-failure
     volumes:
       - /app/node_modules
@@ -28,5 +28,5 @@ services:
       - PGUSER=postgres
       - PGHOST=postgres
       - PGDATABASE=postgres
-      - PGPASSWORD=postgres_password
+      - PGPASSWORD=postgres
       - PGPORT=5432
