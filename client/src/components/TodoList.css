@@ -1,0 +1,11 @@
+.table-cell-title{
+    cursor: pointer;
+    width: 400px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+tr:hover {
+    font-weight: bolder;
+}
