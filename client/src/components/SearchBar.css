@@ -1,0 +1,19 @@
+.searchContainer {
+  margin: 1em;
+  display: flex;
+}
+
+.searchIcon {
+  margin: 0 0.3em 0 0;
+}
+
+#searchBar {
+  border: 2px solid #101940;
+  border-radius: 0.5em;
+}
+
+#searchBar:focus {
+  outline: none;
+  border: 2px solid #101940;
+}
+

@@ -1,0 +1,57 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-family: 'M PLUS 1p', 'Times New Roman';
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  border: 2px solid #101940;
+  border-radius: 0.25em;
+  padding: 1em;
+  margin-bottom: 0;
+  background-color: #101940;
+  color: white;
+}
+
+#return-button {
+  display: inline-block;
+  background-color: #fba936;
+  width: 5em;
+  height: 5em;
+  text-align: center;
+  border:1px solid #fba936;    
+  border-radius: 50%;
+  margin: 2em;
+  position: fixed;
+  bottom: 0.5em;
+  right: 0.5em;
+  transition: all 0.5s, opacity 0.5s, visibility 0.5s;
+  z-index: 1000;
+}
+#return-button:hover {
+  cursor: pointer;
+  background-color: #101940;
+  border:1px solid #101940;    
+  color: white;
+}
+#return-button:active {
+  background-color: #fba936;
+}
+
+input[type=text] { 
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 0.3em 0.5em 0.3em 1em;
+  flex-grow: 1;
+}
