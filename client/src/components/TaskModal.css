@@ -1,0 +1,116 @@
+.taskModal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.taskModal.show {
+  opacity: 1;
+  pointer-events: visible;
+}
+
+.modal-content {
+  width: 450px;
+  background-color: #fff;
+  transform: translateY(-200px);
+  transition: all 0.3s ease-in-out;
+  border: 2px solid #101940;
+  border-radius: 0.5em;
+}
+
+.taskModal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header, .modal-footer {
+  padding: 1em 1.5em 1em 2.5em ;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: #fba936;
+  border-radius: 0.4em 0.4em 0 0;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.closeButton {
+  height: 2em;
+  width: 4em;
+  color: black;
+  background: inherit;
+  border: none;
+}
+
+.closeButton:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.modal-body {
+  border-top: 2px solid #101940;
+  padding: 0.8em;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2em 0 2em;
+}
+
+.formInput {
+  flex-grow: 1;
+}
+
+.formInput:focus {
+  outline: none;
+  border: 2px solid #101940;
+}
+
+.formField {
+  display: flex;
+  flex-grow: 1;
+  padding-bottom: 0.5em;
+  font-size: 1em;
+  font-weight: 600;
+  align-items: center;
+}
+
+.formLabel {
+  margin-right: 0.4em;
+}
+
+.modalButton {
+  width: 35%;
+  font-size: 1em;
+  margin: 0.7em 1em 1em 0;
+  padding: 0.5em;
+  border: 0;
+  border-radius: 0.5em;
+  background-color: #fba936;
+  transition: all 0.5s;
+}
+
+.modalButton:hover {
+  cursor: pointer;
+  background-color: #101940;
+  color: white;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 1em;
+  font-weight: 600;
+}
