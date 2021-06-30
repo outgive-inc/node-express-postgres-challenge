@@ -1,10 +1,22 @@
+import { Fragment } from "react";
+
+import CreateTask from "./components/createTask";
+import ListTasks from "./components/listTasks";
+import Store from "./store/taskStore";
+
 function App() {
-  return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
-    </div>
-  );
+    return (
+        <Fragment>
+            <Store>
+                <div>
+                    <div className="container">
+                        <CreateTask />
+                        <ListTasks />
+                    </div>
+                </div>
+            </Store>
+        </Fragment>
+    );
 }
 
 export default App;
