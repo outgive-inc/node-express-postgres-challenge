@@ -1,8 +1,13 @@
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
+
+import TodoList from "./components/TodoList";
+
 function App() {
   return (
     <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
+      <TodoList />
     </div>
   );
 }
