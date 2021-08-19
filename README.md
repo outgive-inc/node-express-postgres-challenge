@@ -31,58 +31,67 @@ Depending on your machine, you might need to run the command above with sudo:
 sudo docker-compose up
 ```
 
-The client application should now be running on:
+The web app service should now be running on:
 
 ```
-http://localhost:4001
+http://localhost:3000
 ```
 
-The server application should now be running on:
+The api service should now be running on:
 
 ```
-http://localhost:5001
+http://localhost:5000
 ```
 
-When you make a change to the client and server source code, the respective Docker containers running will be udpated as well. In other words, hot-reloading is enabled.
+When you make a change to the client and server source code, the respective Docker containers running will be udpated as well. In other words, hot-reloading is enabled. However, there are certain time when you need to rebuild you docker images. When that happens, just run:
+
+```
+docker-compose up --build
+```
 
 ## Your Challenge
 
-### Server
+### API
 
-All instructions below pertains to the server directory of the project.
+All instructions below pertains to the api-service directory of the project.
 
 ```
-cd server/
+cd api-service/
 ```
 
 - Create initial database table called "tasks" with at least the following fields, data types, and contraints
-  - id (UUID)(PRIMARY KEY)
+  - taskId (UUID)(PRIMARY KEY)
   - title (STRING)(NOT NULL)
   - details (STRING)
   - completed (BOOLEAN)(DEFAULT FALSE)
+
+- Create initial database table called "subTasks" with at least the following fields, data types, and contraints
+  - subTaskId (UUID)(PRIMARY KEY)
+  - taskId (UUID)(FOREIGN KEY -> tasks.taskId)
+  - title (STRING)(NOT NULL)
+  - completed (BOOLEAN)(DEFAULT FALSE)
+
+- The relationship between tasks and sub tasks should be one-to-many
+
 - Create the necessary API routes and DB queries for CRUD functionalitiy
-  - Get all tasks
-  - Get a single task
-  - Create a task
-  - Update a task
-  - Delete a task
 
-**Hint:** Comments with _TODO:_ have been written to help you get started.
-
-### Client
+### Web App
 
 All user stories below pertains to the client directory of the project.
 
 ```
-cd client/
+cd web-app-service/
 ```
 
 - As a user, I want to see a list with all my tasks with titles only.
-- As a user, I want to be able to click on a single task to see the title and details.
+- As a user, I want to be able to click on a single task to see the title, details, and sub-tasks.
 - As a user, I want to create new tasks.
+- As a user, I want to create new sub tasks under a specific task.
 - As a user, I want to update my task's title and details.
 - As a user, I want toggle my task between completed and uncompleted.
+- As a user, I want toggle my sub task between completed and uncompleted.
 - As a user, I want to delete my task.
+- As a user, I want to delete my sub task.
 
 ## Evaluation
 
