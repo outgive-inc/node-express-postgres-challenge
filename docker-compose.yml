@@ -1,29 +1,33 @@
 version: '3'
 services:
-  postgres:
+  postgres-service:
     image: postgres:latest
+    ports:
+      - '5432:5432'
     environment:
       - POSTGRES_PASSWORD=postgres_password
-  web-app:
+
+  web-app-service:
     build:
-      context: ./client
+      context: ./web-app-service
       dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
-      - ./client:/app
+      - ./web-app-service:/app
     ports:
-      - '4001:3000'
+      - '3000:3000'
     restart: on-failure
-  to-do-api:
+
+  api-service:
     build:
-      context: ./server
+      context: ./api-service
       dockerfile: Dockerfile.dev
     ports:
-      - '5001:3001'
+      - '5000:5000'
     restart: on-failure
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ./api-service:/app
     environment:
       - PGUSER=postgres
       - PGHOST=postgres
