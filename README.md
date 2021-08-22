@@ -112,3 +112,5 @@ cd web-app-service/
 ## Submission
 
 Create a merge/pull request on Gitlab. Name the branch as {firstname}-{lastname}-submission.
+
+> Note: Kindly run this command `npm run db:migrate-up` on api-service folder after `docker-compose up`
