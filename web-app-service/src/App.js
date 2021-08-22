@@ -1,10 +1,20 @@
+import '@fontsource/roboto'
+import { Box, ChakraProvider, Container } from '@chakra-ui/react'
+import theme from './theme'
+import { TasksPage as Tasks } from './pages'
+
 function App() {
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
-    </div>
+    <ChakraProvider theme={theme}>
+      <Box bg="gray.50" sx={{ height: '100vh' }}>
+        <Container maxW="container.md">
+          
+          <Tasks />
+
+        </Container>
+      </Box>
+    </ChakraProvider>
   );
 }
 
-export default App;
+export default App

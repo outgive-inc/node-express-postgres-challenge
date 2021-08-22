@@ -1,6 +1,7 @@
 version: '3'
 services:
   postgres-service:
+    container_name: postgres-service
     image: postgres:latest
     ports:
       - '5432:5432'
@@ -8,9 +9,12 @@ services:
       - POSTGRES_PASSWORD=postgres_password
 
   web-app-service:
+    container_name: web-app-service
     build:
       context: ./web-app-service
       dockerfile: Dockerfile.dev
+    environment:
+      CHOKIDAR_USEPOLLING: 'true'
     volumes:
       - /app/node_modules
       - ./web-app-service:/app
@@ -19,6 +23,7 @@ services:
     restart: on-failure
 
   api-service:
+    container_name: api-service
     build:
       context: ./api-service
       dockerfile: Dockerfile.dev
@@ -30,7 +35,7 @@ services:
       - ./api-service:/app
     environment:
       - PGUSER=postgres
-      - PGHOST=postgres
+      - PGHOST=postgres-service
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432

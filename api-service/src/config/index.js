@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const config = {
   pgUser: process.env.PGUSER,
   pgHost: process.env.PGHOST,
