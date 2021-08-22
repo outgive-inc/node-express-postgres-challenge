@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "db:migrate-up": "docker exec api-service npx sequelize-cli db:migrate",
+    "db:migrate-down": "docker exec api-service npx sequelize-cli db:migrate:undo:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,10 +18,15 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "pg": "^7.14.0",
+    "express-validator": "^6.12.1",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.5",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.0"
+    "babel-register": "^6.26.0",
+    "nodemon": "^2.0.0",
+    "sequelize-cli": "^6.2.0"
   }
 }
