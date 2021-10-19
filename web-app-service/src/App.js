@@ -1,9 +1,18 @@
+import React, { Fragment } from 'react';
+import './App.css';
+
+//screen components
+import CreateTask from './components/CreateTask';
+import ListTasks from './components/ListTasks';
+
 function App() {
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
-    </div>
+    <Fragment>
+      <div className="container">
+        <CreateTask />
+        <ListTasks />
+      </div>
+    </Fragment>
   );
 }
 
