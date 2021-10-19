@@ -6,7 +6,7 @@ const SubTaskCompleted = ({ subTask }) => {
 
   const clickComplete = useRef(false);
 
-  const handleCompleted = () => {
+  const setCheckboxValue = () => {
     clickComplete.current = true;
     const opposite = !completed;
     setCompleted(opposite);
@@ -35,7 +35,7 @@ const SubTaskCompleted = ({ subTask }) => {
           : "fa fa-square-o fa-lg mr-3"
       }
       style={{ cursor: "pointer" }}
-      onClick={handleCompleted}
+      onClick={setCheckboxValue}
     ></i></Fragment>
   )
 }

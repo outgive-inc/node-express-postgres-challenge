@@ -6,13 +6,14 @@ const TaskCompleted = ({ task }) => {
 
   const clickComplete = useRef(false);
 
-  const handleCompleted = () => {
+  const setCheckboxValue = () => {
     clickComplete.current = true;
     const opposite = !completed;
     setCompleted(opposite);
     setComplete(opposite);
   };
 
+  //send data to database upon toggling the checkbox
   const setComplete = async (opposite) => {
     try {
       const body = JSON.stringify({completed:opposite});
@@ -21,8 +22,6 @@ const TaskCompleted = ({ task }) => {
         headers: { "Content-Type": "application/json" },
         body: body,
       });
-
-      
 
     } catch (err) {
       console.error(err.message);
@@ -37,7 +36,7 @@ const TaskCompleted = ({ task }) => {
           : "fa fa-square-o fa-lg mr-3"
       }
       style={{ cursor: "pointer" }}
-      onClick={handleCompleted}
+      onClick={setCheckboxValue}
     ></i></Fragment>
   )
 }

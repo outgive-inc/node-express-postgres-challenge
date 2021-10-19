@@ -8,7 +8,7 @@ const CreateTask = () => {
     const refTitleError = useRef();
     const refDetailsError = useRef();
 
-    const onSubmitForm = async e => {
+    const createTask = async e => {
 
         e.preventDefault();
 
@@ -51,7 +51,7 @@ const CreateTask = () => {
             <h1 className="text-center mt-5">
                 PERN Exercise
             </h1>
-            <form onSubmit={onSubmitForm}>
+            <form onSubmit={createTask}>
                 <div className="form-group">
                     <label>Task:</label>
                     <input type="text"

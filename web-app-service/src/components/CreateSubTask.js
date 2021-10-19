@@ -4,7 +4,7 @@ const CreateSubTask = ({ task }) => {
 
     const [title, setTitle] = useState("");
 
-    const onSubmitForm = async e => {
+    const createSubTask = async e => {
 
         e.preventDefault();
 
@@ -18,7 +18,7 @@ const CreateSubTask = ({ task }) => {
                     body: JSON.stringify(body)
                 });
 
-                setTitle("");
+            setTitle("");
         } catch (err) {
             console.error(err.message);
         }
@@ -26,16 +26,15 @@ const CreateSubTask = ({ task }) => {
 
     return (
         <Fragment>
-            <form onSubmit={onSubmitForm}>
-                <div className="form-group">
+            <form onSubmit={createSubTask}>
+                <div className="form-group d-flex">
                     <label>Sub Task:</label>
                     <input type="text"
                         className="form-control"
                         value={title}
                         onChange={e => setTitle(e.target.value)} />
+                    <button type="submit" className="btn btn-primary">Add</button>
                 </div>
-
-                <button type="submit" className="btn btn-primary">Create Sub Task</button>
             </form>
         </Fragment>
     );
