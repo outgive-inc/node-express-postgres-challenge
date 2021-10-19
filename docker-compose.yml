@@ -12,17 +12,6 @@ services:
     env_file:
       - .env
 
-  pgAdmin4:
-    container_name: pgAdmin4
-    image: 'dpage/pgadmin4:latest'
-    ports:
-      - '8080:80'
-    depends_on:
-      - postgres-service
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=nate_sanchez1026@yahoo.com
-      - PGADMIN_DEFAULT_PASSWORD=postgres
-
   web-app-service:
     container_name: web-app-service
     build:
