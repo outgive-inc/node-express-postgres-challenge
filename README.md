@@ -113,4 +113,12 @@ cd web-app-service/
 
 Create a merge/pull request on Gitlab. Name the branch as {firstname}-{lastname}-submission.
 
-After running docker-compose up, run yarn knex migrate:latest
+Deployment instructions:
+Step 1:
+```
+docker-compose up
+```
+Step 2:
+```
+yarn knex migrate:latest
+```
