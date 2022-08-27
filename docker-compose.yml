@@ -1,9 +1,9 @@
-version: '3'
+version: "3"
 services:
   postgres-service:
     image: postgres:latest
     ports:
-      - '5432:5432'
+      - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=postgres_password
 
@@ -15,15 +15,16 @@ services:
       - /app/node_modules
       - ./web-app-service:/app
     ports:
-      - '3000:3000'
+      - "3000:3000"
     restart: on-failure
 
   api-service:
+    container_name: node-api-service
     build:
       context: ./api-service
       dockerfile: Dockerfile.dev
     ports:
-      - '5000:5000'
+      - "5000:5000"
     restart: on-failure
     volumes:
       - /app/node_modules

@@ -1,8 +1,8 @@
+import Task from "./pages/Task";
 function App() {
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <p>Display the list of to do tasks here with basic CRUD operations</p>
+    <div className="container w-1/2 mx-auto mt-12 ">
+      <Task />
     </div>
   );
 }
