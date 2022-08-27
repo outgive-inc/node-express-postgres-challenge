@@ -1,5 +1,4 @@
 const config = require("./");
-console.log("config database:::", config);
 
 module.exports = {
   development: {

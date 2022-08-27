@@ -12,7 +12,6 @@ module.exports = {
 
   CreateSubTask: async (req, res) => {
     try {
-      console.log("req.bodu", req.body);
       if (!req.body.title) {
         return res
           .status(400)

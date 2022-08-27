@@ -14,7 +14,6 @@ module.exports = {
 
   CreateTask: async (req, res) => {
     try {
-      console.log("req.bodu", req.body);
       if (!req.body.title) {
         return res
           .status(400)
@@ -22,7 +21,6 @@ module.exports = {
       }
 
       const task = await Task.create(req.body);
-      console.log("task", task);
       if (task) {
         res
           .status(200)

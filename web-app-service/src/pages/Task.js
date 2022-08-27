@@ -11,7 +11,6 @@ export default function Task() {
   const fetchTasks = async () => {
     const response = await fetch("http://localhost:5000/api/v1/tasks");
     const tasks = await response.json();
-    console.log("resp", tasks);
     setTasks(tasks.data);
   };
   useEffect(() => {
