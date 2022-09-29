@@ -2,7 +2,8 @@ const connection = require('../../connection');
 
 module.exports = {
     toggleCompletedStatus(req, res) {
-        connection.query(`UPDATE task SET isCompleted = NOT isCompleted WHERE id = $1`, [req.params.taskId], (err, result) => {
+        console.log(req.params.id);
+        connection.query(`UPDATE task SET iscompleted = NOT iscompleted WHERE id = $1`, [req.params.id], (err, result) => {
             if (!err) {
                 return res.send(result.rows);
             } else {

@@ -2,7 +2,7 @@ const connection = require('../../connection');
 
 module.exports = {
     getTasks(req, res) {
-        connection.query(`Select title, createdAt from task`, (err, result) => {
+        connection.query(`Select id, title, isCompleted, createdAt from task`, (err, result) => {
             if (!err) {
                 return res.send(result.rows);
             } else {

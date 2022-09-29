@@ -15,7 +15,7 @@ module.exports = (app) => {
     app.delete('/delete-task/:id', controllers.deleteTask);
     app.get('/toggle-completed-status/:id', controllers.toggleCompletedStatus);
 
-    app.post('/create-subtask', controllers.createSubTask);
+    app.post('/create-subtask/:id', controllers.createSubTask);
     app.delete('/delete-subtask/:id', controllers.deleteSubTask);
     app.get('/toggle-subtask-status/:id', controllers.toggleSubTaskStatus);
 }
