@@ -1,0 +1,176 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+.task-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  width: 100%;
+  min-height: 80px;
+  border-radius: 10px;
+  margin-top: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-sizing: border-box;
+}
+.task-heading {
+  font-size: 18px;
+  cursor: pointer;
+}
+.task-check {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.task-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.task-sub-details {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  /* padding-left: 40px; */
+}
+.task-main {
+  width: 90%;
+  /* background-color: #000; */
+  border-radius: 10px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-sizing: border-box;
+  padding: 0px 40px;
+}
+.task-main p {
+  margin: 0px 0;
+  text-align: justify;
+}
+.sub-tasks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.sub-tasks h3 {
+  margin-top: 30px;
+}
+.sub-tasks p {
+  margin-bottom: 8px;
+}
+.sub-tasks p input {
+  height: 15px;
+  width: 15px;
+  margin-right: 15px;
+}
+.add-sub-task {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* margin-left: 40px; */
+  margin-top: 40px;
+}
+.add-sub-task-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px;
+  border: solid 1px #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(32, 138, 32);
+  color: #fff;
+}
+.task-check-icon {
+  font-size: 24px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: #000;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.main-div {
+  width: 600px;
+  margin-top: 3rem;
+}
+
+.tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mid-div {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+.add-task-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(32, 138, 32);
+  padding: 0.55rem 1.6rem !important;
+  border-radius: 6px;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0;
+  color: white;
+}
+
+.main-heading {
+  padding: 0.5rem 1rem;
+  background-color: aquamarine;
+  border-radius: 5px;
+}
+.addtask-field {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.sub-task {
+  display: flex;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.sub-task p {
+  margin: 0;
+  padding: 0.5rem 0.5rem;
+  width: 100%;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.task-actions-icon {
+  font-size: 24px;
+}
+
+.delete-subtask-icon {
+  font-size: 20px;
+}
+
+.task-actions-icon,
+.delete-subtask-icon {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+}
